@@ -1,5 +1,23 @@
 # AWS Infrastructure Creation using Terraform
 
+``` mermaid
+graph TD
+    A[Start: Terraform Configuration] --> B[Provider: AWS]
+    B --> C[Variables: AWS Region, VPC ID, Key Name]
+    C --> D[Security Group: Jenkins SG]
+    D --> E[Ingress: Port 8081 - Jenkins, Port 22 - SSH]
+    D --> F[Egress: Allow All Traffic]
+    B --> G[Data Source: Amazon Linux AMI]
+    B --> H[IAM Role: test_role]
+    H --> I[IAM Instance Profile: test_profile]
+    H --> J[IAM Policy: test_policy - Full Access]
+    G --> K[AWS Instance: Jenkins]
+    I --> K
+    D --> K
+    K --> L[User Data: install_jenkins.sh]
+    L --> M[Jenkins EC2 Instance Running]
+```
+
 Helpful Terraform Links:
 - [Terraform Language Documentation](https://www.terraform.io/docs/language/index.html)
 - [Resource: aws_security_group](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group)
